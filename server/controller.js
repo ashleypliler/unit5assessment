@@ -241,14 +241,16 @@ module.exports = {
          })
     },
     createCity: (req, res) => {
-        const {name, rating, countryId} = req.body;
+        const {name, rating, country_id} = req.body;
+
+            console.log(typeof rating, '=rating', typeof countryId, '=countryId')
+
         sequelize.query(
-            `INSERT INTO cities (name, rating, countryId)
-            VALUES('${name}', '${rating}', '${countryId})`
+            `INSERT INTO cities (name, rating, country_id) VALUES('${name}', ${rating}, ${country_id});`
         ).then((dbRes) => {
             res.status(200).send(dbRes[0])
-         }).catch(() => {
-            console.log(`error, could not create city`)
+         }).catch((e) => {
+            console.log(e,`error, could not create city`)
          });
     },
     getCities: (req, res) => {

@@ -31,6 +31,11 @@ module.exports = {
                 country_id integer
             );
 
+            insert into cities (name)
+            values('New York'),
+            ('Los Angeles'),
+            ('Chicago');
+
             insert into countries (name)
             values ('Afghanistan'),
             ('Albania'),
@@ -256,7 +261,8 @@ module.exports = {
             `SELECT cities.name AS city, cities.country_id, countries.country_id, rating, countries.name AS country
              FROM cities
              JOIN countries
-             ON cities.country_id = countries.country_id;`
+             ON cities.country_id = countries.country_id
+             ORDER BY rating DESC`
         ).then((dbRes) => {
             res.status(200).send(dbRes[0])
          }).catch(() => {
